@@ -1,28 +1,23 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
-  </div>
+<div id="app">
+  <router-view></router-view>
+  <FootGuide v-if="$route.meta.isShowFooter"/>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-
+import FootGuide from './components/FooterGuide/FootGuide'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  components:{
+    FootGuide
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus">
+  #app
+    width 100%
+    height 100%
+    background #f5f5f5
 </style>
