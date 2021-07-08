@@ -16,7 +16,10 @@ export default new VueRouter({
   routes:[
     {
       path:'/',
-      redirect:MSite
+      redirect:'/msite',
+      meta:{
+        isShowFooter:true
+      }
     },
     {
       path:'/msite',

@@ -7,7 +7,16 @@
 
 <script>
 import FootGuide from './components/FooterGuide/FootGuide'
+
+
 export default {
+
+mounted(){
+ this.$store.dispatch('getAddress')
+   this.$store.dispatch('getCategorys')
+  this.$store.dispatch('getShops')
+}
+  ,
   name: "App",
   components:{
     FootGuide
