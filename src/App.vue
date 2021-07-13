@@ -7,14 +7,17 @@
 
 <script>
 import FootGuide from './components/FooterGuide/FootGuide'
-
+import {mapActions} from 'vuex'
 
 export default {
-
+methods:{
+  ...mapActions(['getAddress','getCategorys','getShops','getUserInfo'])
+},
 mounted(){
- this.$store.dispatch('getAddress')
-   this.$store.dispatch('getCategorys')
-  this.$store.dispatch('getShops')
+   this.getCategorys()
+   this.getAddress()
+   this.getShops()
+   this.getUserInfo()
 }
   ,
   name: "App",
