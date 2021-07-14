@@ -9,7 +9,9 @@ import {
   DELETE_USER_INFO,
   RECEIVE_INFO,
   RECEIVE_RATINGS,
-  RECEIVE_GOODS
+  RECEIVE_GOODS,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT
 } from './mutation-type'
 import {reqFoodTypes,reqAddress,reqShops,reqUserInfo,reqLogout,reqShopGoods,reqShopInfo,reqShopRatings} from '../api'
 export default {
@@ -86,5 +88,14 @@ export default {
       callback && callback()
     }
     },
+  updateFoodCount({commit},{flag,food}){
+    if (flag){
+    commit(DECREMENT_FOOD_COUNT, {food})
+
+    }else {
+      commit(INCREMENT_FOOD_COUNT, {food})
+    }
+
+  },
 
 }

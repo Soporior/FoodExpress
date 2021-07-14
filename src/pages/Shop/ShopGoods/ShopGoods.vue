@@ -19,7 +19,7 @@
           <li class="food-list-hook" v-for="(good,index) in goods" :key="index">
             <h1 class="title">{{ good.name }}</h1>
             <ul>
-              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods">
+              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods"   @click="showFood(food)"            >
                 <div class="icon">
                   <img width="57" height="57" :src="food.image">
                 </div>
@@ -31,7 +31,9 @@
                     <span class="now">￥{{food.price}}</span>
                     <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
-                  <div class="cartcontrol-wrapper"> CartControl</div>
+                  <div class="cartcontrol-wrapper">
+                    <CatControl :food="food"></CatControl>
+                  </div>
                 </div>
               </li>
 
@@ -39,21 +41,30 @@
           </li>
 
         </ul>
+        <ShopCart></ShopCart>
       </div>
 
-
+      <Food :food="food" ref="food"></Food>
     </div>
 
 </template>
 <script>
 import {mapState} from 'vuex'
 import BScroll from 'better-scroll'
-
+import CatControl from '../../../components/CartControl/CatControl'
+import Food from '../../../components/Food/Food'
+import ShopCart from '../../../components/ShopCart/ShopCart'
 export default {
+  components:{
+    CatControl,
+    Food,
+    ShopCart
+  }
+  ,
   data(){
     return{
       tops:[],
-      food:0,
+      food:{},
       scrollY:0
     }
   },
@@ -127,7 +138,12 @@ export default {
       },
     //给右边菜单绑定事件
     clickMenuItem(index){
-      this.foodScroll.scrollTo(0,-this.tops[index],300)
+      this.foodScroll.scrollTo(0,-this.tops[index],3000)
+    },
+    //
+    showFood(food){
+      this.food = food
+      this.$refs.food.toggleShow()
     }
 
   }

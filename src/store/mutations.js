@@ -1,6 +1,7 @@
 /*
 * 这是vuex的核心管理对象store
 * */
+import Vue from 'vue'
 import {
   RECEIVE_CATEGORYS,
   RECEIVE_ADDRESS,
@@ -9,7 +10,9 @@ import {
   DELETE_USER_INFO,
   RECEIVE_INFO,
   RECEIVE_RATINGS,
-  RECEIVE_GOODS
+  RECEIVE_GOODS,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT
 } from './mutation-type'
 export default {
   [RECEIVE_ADDRESS](state,{address}){
@@ -33,6 +36,27 @@ export default {
     state.ratings = ratings
   }, [RECEIVE_GOODS](state, {goods}) {
     state.goods = goods
-  },
-
+  },[INCREMENT_FOOD_COUNT](state,{food}){
+    if (!food.count){//第一次点击
+     //food.count = 1
+      /*
+      对象
+      属性名
+      属性值
+       */
+      Vue.set(food,'count',1)//让新增属性也有数据绑定
+      //让新添加的food放进购物车里
+      state.cartFoods.push(food)
+    }else {
+      food.count++
+    }
+  },[DECREMENT_FOOD_COUNT](state,{food}){
+    if (food.count){
+      food.count--
+      if (food.count===0){
+        //删除数量为0的food
+        state.cartFoods.splice(state.cartFoods.indexOf(food),1)
+      }
+    }
+  }
 }
