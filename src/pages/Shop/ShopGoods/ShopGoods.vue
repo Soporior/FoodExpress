@@ -117,7 +117,7 @@ export default {
         this.scrollY = Math.abs(y)
       })
     },
-    //初始化tops
+    //获取tops
     _initTops(){
       //初始化tops
      const tops = [0]
