@@ -11,7 +11,8 @@ import {
   RECEIVE_RATINGS,
   RECEIVE_GOODS,
   INCREMENT_FOOD_COUNT,
-  DECREMENT_FOOD_COUNT
+  DECREMENT_FOOD_COUNT,
+  CLEAR_CART
 } from './mutation-type'
 import {reqFoodTypes,reqAddress,reqShops,reqUserInfo,reqLogout,reqShopGoods,reqShopInfo,reqShopRatings} from '../api'
 export default {
@@ -70,7 +71,7 @@ export default {
   }
   },
   // 异步获取商家评价列表
-  async getShopRatings({commit}, cb) {
+  async getShopRatings({commit}) {
     const result = await reqShopRatings()
     if(result.code===0) {
       const ratings = result.data
@@ -97,5 +98,8 @@ export default {
     }
 
   },
+  clearCart({commit}){
+    commit(CLEAR_CART)
+  }
 
 }

@@ -12,7 +12,8 @@ import {
   RECEIVE_RATINGS,
   RECEIVE_GOODS,
   INCREMENT_FOOD_COUNT,
-  DECREMENT_FOOD_COUNT
+  DECREMENT_FOOD_COUNT,
+  CLEAR_CART
 } from './mutation-type'
 export default {
   [RECEIVE_ADDRESS](state,{address}){
@@ -58,5 +59,11 @@ export default {
         state.cartFoods.splice(state.cartFoods.indexOf(food),1)
       }
     }
+  },
+  [CLEAR_CART](state) {
+    //清空前把count都清0否则无法从新加入购物车（由加入购物车的条件决定）
+    state.cartFoods.forEach(food=>food.count=0)
+    //清空购物车所有food
+    state.cartFoods = []
   }
 }

@@ -15,10 +15,11 @@
           <div class="pay" :class="payClass"> {{payText}}</div>
         </div>
       </div>
+      <transition name="move">
       <div class="shopcart-list" v-show="listShow">
         <div class="list-header">
           <h1 class="title">购物车</h1>
-          <span class="empty">清空</span></div>
+          <span class="empty" @click="clearCart">清空</span></div>
         <div class="list-content">
           <ul>
             <li class="food" v-for="(food,index) in cartFoods" :key="index">
@@ -31,6 +32,7 @@
           </ul>
         </div>
       </div>
+      </transition>
     </div>
     <div class="list-mask" v-show="listShow" @click="toggleShow"></div>
   </div>
@@ -39,6 +41,8 @@
 <script>
 import {mapState,mapGetters} from 'vuex'
 import CartControl from '../../components/CartControl/CatControl'
+import BScroll from 'better-scroll'
+import { MessageBox } from 'mint-ui';
 export default {
   data(){
     return{
@@ -69,6 +73,16 @@ export default {
         this.isShow = false
         return false
       }
+      if(this.isShow){
+        //确保只生成一个滑动实例
+     if (!this.scroll){
+       this.$nextTick(()=>{
+         new BScroll('.list-content',{click:true,stopPropagation:true})
+       })
+     }else{
+       this.scroll.refresh()
+     }
+      }
       return this.isShow
     }
   },
@@ -76,6 +90,13 @@ export default {
   methods:{
     toggleShow() {
       this.isShow=!this.isShow
+    },
+    clearCart(){
+      MessageBox.confirm('确定清空？').then(
+        ()=>{
+          this.$store.dispatch('clearCart')
+        }
+      )
     }
   }
 }
@@ -192,7 +213,7 @@ export default {
     width 100%
     transform translateY(-100%)
     &.move-enter-active, &.move-leave-active
-      transition transform .3s
+      transition transform .5s
     &.move-enter, &.move-leave-to
       transform translateY(0)
     .list-header
