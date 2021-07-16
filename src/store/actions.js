@@ -76,7 +76,8 @@ export default {
     if(result.code===0) {
       const ratings = result.data
       commit(RECEIVE_RATINGS, {ratings})
-
+      // 如果组件中传递了接收消息的回调函数, 数据更新后, 调用回调通知调用的组件
+      callback && callback()
     }
       },
   // 异步获取商家商品列表
@@ -89,6 +90,7 @@ export default {
       callback && callback()
     }
     },
+  //更新食物的数量
   updateFoodCount({commit},{flag,food}){
     if (flag){
     commit(DECREMENT_FOOD_COUNT, {food})
