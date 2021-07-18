@@ -21,7 +21,7 @@
             <ul>
               <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods"   @click="showFood(food)"            >
                 <div class="icon">
-                  <img width="57" height="57" :src="food.image">
+                  <img width="57" height="57" v-lazy="food.image">
                 </div>
                 <div class="content"><h2 class="name">{{ food.name }}</h2>
                   <p class="desc">{{ food.description }}</p>

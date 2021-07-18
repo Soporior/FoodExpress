@@ -14,7 +14,7 @@ import {
   DECREMENT_FOOD_COUNT,
   CLEAR_CART
 } from './mutation-type'
-import {reqFoodTypes,reqAddress,reqShops,reqUserInfo,reqLogout,reqShopGoods,reqShopInfo,reqShopRatings} from '../api'
+import {reqFoodTypes,reqAddress,reqShops,reqUserInfo,reqLogout,reqShopGoods,reqShopInfo,reqShopRatings,reqSearchShop} from '../api'
 export default {
   //异步获取地址
   async getAddress({commit,state}){
